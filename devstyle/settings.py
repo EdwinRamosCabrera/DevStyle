@@ -120,11 +120,25 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# URL to use when referring to static files located in STATIC_ROOT.
+# Ensure it starts and ends with a slash so URL reversing and serving work properly.
+STATIC_URL = '/static/'
+
+# During development your project's static assets live in BASE_DIR / 'static'.
+# Tell Django's staticfiles app to also look there.
+STATICFILES_DIRS = [
+    BASE_DIR / 'devstyle/static',
+]
+# Directory where `collectstatic` will collect static files for production.
+# Use a different folder than the source `static/` to avoid conflicts.
+STATIC_ROOT = BASE_DIR / 'static'
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
