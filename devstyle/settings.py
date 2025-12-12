@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'app_store',
+    'app_home',
 ]
 
 # Tailwind
@@ -67,7 +68,7 @@ ROOT_URLCONF = 'devstyle.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
