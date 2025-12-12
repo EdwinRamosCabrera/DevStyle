@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="w-full md:w-1/2 flex justify-center mb-10 md:mb-0">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            <img src="{% static 'images/devstyle.png' %}" 
                 alt="Modelos DevStyle" class="max-h-[500px] object-cover rounded-xl shadow-2xl md:mask-image-gradient">
         </div>
     </header>
@@ -114,35 +114,20 @@
         <div class="flex items-center justify-center gap-4">
             <button class="hidden md:block text-blue-600 text-3xl hover:scale-110 transition"><i
                     class="fa-solid fa-caret-left"></i></button>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+                {% for category in categories %}
                 <div class="flex flex-col items-center group cursor-pointer">
                     <div
                         class="bg-white p-6 rounded-lg shadow-md w-full h-64 flex items-center justify-center group-hover:shadow-xl transition">
-                        <img src="https://via.placeholder.com/300x300/00aa55/ffffff?text=Polos" alt="Polos"
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}"
                             class="max-h-52 object-contain mix-blend-multiply">
                     </div>
-                    <h3 class="mt-4 font-bold text-lg">Polos</h3>
+                    <h3 class="mt-4 font-bold text-lg">{{ category.name }}</h3>
                 </div>
-                <div class="flex flex-col items-center group cursor-pointer">
-                    <div
-                        class="bg-gray-300 p-6 rounded-lg shadow-md w-full h-64 flex items-center justify-center relative group-hover:shadow-xl transition">
-                        <span class="absolute top-2 left-2 bg-white px-2 py-0.5 text-xs font-bold rounded">HOT</span>
-                        <img src="https://via.placeholder.com/300x300/000000/ffffff?text=Poleras" alt="Poleras"
-                            class="max-h-52 object-contain mix-blend-multiply">
-                    </div>
-                    <h3 class="mt-4 font-bold text-lg">Poleras</h3>
-                </div>
-                <div class="flex flex-col items-center group cursor-pointer">
-                    <div
-                        class="bg-white p-6 rounded-lg shadow-md w-full h-64 flex items-center justify-center group-hover:shadow-xl transition">
-                        <img src="https://via.placeholder.com/300x300/white/000000?text=Gorras" alt="Gorras"
-                            class="max-h-52 object-contain">
-                    </div>
-                    <h3 class="mt-4 font-bold text-lg">Gorras</h3>
-                </div>
-            </div>
-
+            {% empty %}
+                <h2 class="text-2xl font-bold text-center">No hay categorias disponibles</h2>
+            {% endfor %}
+            </div>   
             <button class="hidden md:block text-blue-600 text-3xl hover:scale-110 transition"><i
                     class="fa-solid fa-caret-right"></i></button>
         </div>
@@ -152,50 +137,22 @@
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nuevos Productos</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-
+            {%for product in products %}
             <div class="group">
                 <div class="bg-[#F2F2F2] rounded-xl p-6 mb-4 h-80 flex items-center justify-center relative">
-                    <img src="https://via.placeholder.com/300x400/333/fff?text=T-Shirt"
+                    <img src="{{ product.image.url }}"
                         class="max-h-full mix-blend-multiply">
                 </div>
-                <h3 class="font-bold text-sm">T-shirt with Tape Details</h3>
-                <p class="font-bold text-lg mt-1">$120</p>
-            </div>
-
-            <div class="group">
-                <div class="bg-[#F2F2F2] rounded-xl p-6 mb-4 h-80 flex items-center justify-center relative">
-                    <img src="https://via.placeholder.com/300x400/2a4158/fff?text=Jeans"
-                        class="max-h-full mix-blend-multiply">
-                </div>
-                <h3 class="font-bold text-sm">Skinny Fit Jeans</h3>
+                <h3 class="font-bold text-sm">{{ product.name }}</h3>
                 <div class="flex items-center gap-2 mt-1">
-                    <p class="font-bold text-lg">$240</p>
+                    <p class="font-bold text-lg">S/.{{ product.price }}</p>
                     <p class="text-gray-400 line-through text-sm">$260</p>
                     <span class="text-red-500 text-xs bg-red-100 px-1 rounded">-20%</span>
                 </div>
             </div>
-
-            <div class="group">
-                <div class="bg-[#F2F2F2] rounded-xl p-6 mb-4 h-80 flex items-center justify-center relative">
-                    <img src="https://via.placeholder.com/300x400/800020/fff?text=Shirt"
-                        class="max-h-full mix-blend-multiply">
-                </div>
-                <h3 class="font-bold text-sm">Checkered Shirt</h3>
-                <p class="font-bold text-lg mt-1">$180</p>
-            </div>
-
-            <div class="group">
-                <div class="bg-[#F2F2F2] rounded-xl p-6 mb-4 h-80 flex items-center justify-center relative">
-                    <img src="https://via.placeholder.com/300x400/dd5500/fff?text=Striped"
-                        class="max-h-full mix-blend-multiply">
-                </div>
-                <h3 class="font-bold text-sm">Sleeve Striped T-shirt</h3>
-                <div class="flex items-center gap-2 mt-1">
-                    <p class="font-bold text-lg">$130</p>
-                    <p class="text-gray-400 line-through text-sm">$160</p>
-                    <span class="text-red-500 text-xs bg-red-100 px-1 rounded">-30%</span>
-                </div>
-            </div>
+            {% empty %}
+                <h2 class="text-2xl font-bold text-center">No hay productos disponibles</h2>
+            {% endfor %}
 
         </div>
 

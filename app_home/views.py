@@ -8,7 +8,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.order_by('-created_at')[:4]
-        context['categories'] = Category.objects.all()
+        context['categories'] = Category.objects.order_by('code')[:3]
+        print(context)
         return context
     
 
