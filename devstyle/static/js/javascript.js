@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(card);
     });
 
-
     // 2. Animación e interactividad del botón "Agregar"
     const addButtons = document.querySelectorAll('.add-to-cart-btn');
 
@@ -54,4 +53,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 2000);
         });
     });
+
+    // 3. Busqueda de productos
+    const searchInput = document.getElementById('search-input');
+    const productCards = document.querySelectorAll('.product-card');
+    const totalProducts = document.getElementById('total-products');
+    const resultsCount = document.getElementById('results-count');
+    resultsCount.style.display = 'none';
+    
+    if(searchInput){
+        searchInput.addEventListener('input', function(e) {
+            totalProducts.style.display = 'none';
+            resultsCount.style.display = 'block';
+            const searchTerm = e.target.value.toLowerCase();
+            let visibleCount = 0;
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            resultsCount.textContent = `Mostrando ${visibleCount} producto${visibleCount !== 1? 's': ''}`;
+        });
+    }
 });
