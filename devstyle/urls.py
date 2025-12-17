@@ -23,11 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_home.urls')),
     path('store/', include('app_store.urls')),
+    path('account/', include('app_account.urls')),
 ]
 
 # Only in development (DEBUG=True) serve media and static files via django.views.static
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
-
-

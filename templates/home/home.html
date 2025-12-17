@@ -58,7 +58,6 @@
                     <p class="text-xs text-gray-500">tí 24/7</p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -71,15 +70,20 @@
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
                 {% for category in categories %}
                 <div class="flex flex-col items-center group cursor-pointer">
-                    <div
-                        class="bg-white p-6 rounded-lg shadow-md w-full h-64 flex items-center justify-center group-hover:shadow-xl transition">
+                    <div class="bg-white p-6 rounded-lg shadow-md w-full h-auto flex items-center justify-center group-hover:shadow-xl transition">
+                        {% if category.image %}
                         <img src="{{ category.image.url }}" alt="{{ category.name }}"
-                            class="max-h-52 object-contain mix-blend-multiply">
+                            class="max-h-64 object-contain mix-blend-multiply">
+                        {% else %}
+                        <img src="https://placehold.co/400x400/111827/FFFFFF/png?text=No-Image&font=roboto" alt="{{ category.name }}" class="w-4/5 h-auto object-contain z-0">
+                        {% endif %}
                     </div>
                     <h3 class="mt-4 font-bold text-lg">{{ category.name }}</h3>
                 </div>
             {% empty %}
-                <h2 class="text-2xl font-bold text-center">No hay categorias disponibles</h2>
+                <div class="w-auto flex flex-col items-center justify-center col-span-3 h-80">
+                    <h2 class="text-center text-xl font-bold text-gray-600 mt-4">No hay categorias disponibles</h2>
+                </div>
             {% endfor %}
             </div>   
             <button class="hidden md:block text-blue-600 text-3xl hover:scale-110 transition"><i
@@ -94,8 +98,12 @@
             {%for product in products %}
             <div class="group">
                 <div class="bg-[#F2F2F2] rounded-xl p-6 mb-4 h-80 flex items-center justify-center relative">
+                    {% if product.image %}
                     <img src="{{ product.image.url }}"
                         class="max-h-full mix-blend-multiply">
+                    {% else %}
+                    <img src="https://placehold.co/400x400/111827/FFFFFF/png?text=No-Image&font=roboto" alt="{{ product.name }}" class="w-4/5 h-auto object-contain z-0">
+                    {% endif %}
                 </div>
                 <h3 class="font-bold text-sm">{{ product.name }}</h3>
                 <div class="flex items-center gap-2 mt-1">
@@ -105,15 +113,15 @@
                 </div>
             </div>
             {% empty %}
-                <h2 class="text-2xl font-bold text-center">No hay productos disponibles</h2>
+                <div class="w-auto flex flex-col items-center justify-center col-span-4">
+                    <h2 class="text-center text-xl font-bold text-gray-600 mt-4">No hay productos disponibles</h2>
+                </div>
             {% endfor %}
-
         </div>
 
         <div class="text-center">
-            <button
-                class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-full font-bold shadow-lg transition">Ir
-                a la Tienda</button>
+            <a href="{% url 'app_store:store' %}"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-full font-bold shadow-lg transition">Ir a la Tienda</a>
         </div>
     </section>
 

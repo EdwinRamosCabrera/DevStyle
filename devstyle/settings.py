@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'theme',
     'app_store',
     'app_home',
+    'app_account',
 ]
 
 # Tailwind
@@ -82,6 +83,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'devstyle.wsgi.application'
 
+# AUTH
+# https://docs.djangoproject.com/en/5.2/ref/settings/#auth
+
+AUTH_USER_MODEL = 'app_account.User'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
