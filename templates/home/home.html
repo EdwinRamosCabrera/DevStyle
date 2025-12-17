@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <header class="container mx-auto px-4 md:px-8 py-12 md:py-20 flex flex-col-reverse md:flex-row items-center">
+        <div class="w-full md:w-1/2 text-center md:text-left space-y-6">
+            <h1 class="font-gothic text-5xl md:text-7xl leading-tight text-black">
+                Encuentra ropa y <br> accesorios que <br> codifican tú estilo
+            </h1>
+            <p class="text-gray-600 text-sm md:text-base max-w-md mx-auto md:mx-0">
+                Navega entre una variedad de prendas y accesorios para tí y tú ambiente de trabajo que te identificaran
+                como un verdadero programador.
+            </p>
+            <div class="flex justify-center md:justify-start gap-4 pt-4">
+                <button
+                    class="bg-black text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-800 transition">Contáctanos</button>
+                <button
+                    class="bg-black text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-800 transition">Cátalogo</button>
+            </div>
+        </div>
+        <div class="w-full md:w-1/2 flex justify-center mb-10 md:mb-0">
+            <img src="{% static 'images/devstyle.png' %}" 
+                alt="Modelos DevStyle" class="max-h-[500px] object-cover rounded-xl shadow-2xl md:mask-image-gradient">
+        </div>
+    </header>
+
+    <section class="bg-white py-8 border-y border-gray-200">
+        <div
+            class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center md:text-left">
+
+            <div class="flex items-center justify-center md:justify-start space-x-3">
+                <i class="fa-solid fa-motorcycle text-3xl text-gray-400"></i>
+                <div>
+                    <h4 class="font-bold text-sm">Recogida en</h4>
+                    <p class="text-xs text-gray-500">la acera</p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center md:justify-start space-x-3">
+                <i class="fa-solid fa-box-open text-3xl text-gray-400"></i>
+                <div>
+                    <h4 class="font-bold text-sm">Envío gratis en compras</h4>
+                    <p class="text-xs text-gray-500">de más de $(499)</p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center md:justify-start space-x-3">
+                <i class="fa-solid fa-percent text-3xl text-gray-400"></i>
+                <div>
+                    <h4 class="font-bold text-sm">Precios bajos</h4>
+                    <p class="text-xs text-gray-500">garantizados</p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center md:justify-start space-x-3">
+                <i class="fa-solid fa-clock text-3xl text-gray-400"></i>
+                <div>
+                    <h4 class="font-bold text-sm">Disponible para</h4>
+                    <p class="text-xs text-gray-500">tí 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Categorias</h2>
+
+        <div class="flex items-center justify-center gap-4">
+            <button class="hidden md:block text-blue-600 text-3xl hover:scale-110 transition"><i
+                    class="fa-solid fa-caret-left"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+                {% for category in categories %}
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div class="bg-white p-6 rounded-lg shadow-md w-full h-auto flex items-center justify-center group-hover:shadow-xl transition">
+                        {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}"
+                            class="max-h-64 object-contain mix-blend-multiply">
+                        {% else %}
+                        <img src="https://placehold.co/400x400/111827/FFFFFF/png?text=No-Image&font=roboto" alt="{{ category.name }}" class="w-4/5 h-auto object-contain z-0">
+                        {% endif %}
+                    </div>
+                    <h3 class="mt-4 font-bold text-lg">{{ category.name }}</h3>
+                </div>
+            {% empty %}
+                <div class="w-auto flex flex-col items-center justify-center col-span-3 h-80">
+                    <h2 class="text-center text-xl font-bold text-gray-600 mt-4">No hay categorias disponibles</h2>
+                </div>
+            {% endfor %}
+            </div>   
+            <button class="hidden md:block text-blue-600 text-3xl hover:scale-110 transition"><i
+                    class="fa-solid fa-caret-right"></i></button>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-16 bg-white rounded-3xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nuevos Productos</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {%for product in products %}
+            <div class="group">
+                <div class="bg-[#F2F2F2] rounded-xl p-6 mb-4 h-80 flex items-center justify-center relative">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}"
+                        class="max-h-full mix-blend-multiply">
+                    {% else %}
+                    <img src="https://placehold.co/400x400/111827/FFFFFF/png?text=No-Image&font=roboto" alt="{{ product.name }}" class="w-4/5 h-auto object-contain z-0">
+                    {% endif %}
+                </div>
+                <h3 class="font-bold text-sm">{{ product.name }}</h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <p class="font-bold text-lg">S/.{{ product.price }}</p>
+                    <p class="text-gray-400 line-through text-sm">$260</p>
+                    <span class="text-red-500 text-xs bg-red-100 px-1 rounded">-20%</span>
+                </div>
+            </div>
+            {% empty %}
+                <div class="w-auto flex flex-col items-center justify-center col-span-4">
+                    <h2 class="text-center text-xl font-bold text-gray-600 mt-4">No hay productos disponibles</h2>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center">
+            <a href="{% url 'app_store:store' %}"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-full font-bold shadow-lg transition">Ir a la Tienda</a>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-16">
+        <div class="flex justify-between items-end mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold w-full text-center md:text-left">Nuestros clientes satisfechos
+            </h2>
+            <div class="hidden md:flex gap-4">
+                <button class="text-gray-400 hover:text-black"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="text-black"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div class="border border-gray-200 p-6 rounded-xl bg-white bg-opacity-50">
+                <div class="text-yellow-400 text-sm mb-4">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center font-bold">
+                        C</div>
+                    <div>
+                        <h4 class="font-bold text-sm">Carla Medina</h4>
+                        <p class="text-xs text-gray-500">Frontend Developer</p>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-600 leading-relaxed">
+                    "He comprado varios artículos aquí, incluyendo un teclado y todo ha sido de la mejor calidad. El
+                    envío siempre llega a tiempo..."
+                </p>
+            </div>
+
+            <div class="border border-gray-200 p-6 rounded-xl bg-white bg-opacity-50">
+                <div class="text-yellow-400 text-sm mb-4">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-red-500 text-white flex items-center justify-center font-bold">
+                        M</div>
+                    <div>
+                        <h4 class="font-bold text-sm">Mario Reyes</h4>
+                        <p class="text-xs text-gray-500">Data Engineer</p>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-600 leading-relaxed">
+                    "Compré unas poleras con el tema de mi lenguaje favorito de programación y siempre llama la atención
+                    en la oficina..."
+                </p>
+            </div>
+
+            <div class="border border-gray-200 p-6 rounded-xl bg-white bg-opacity-50">
+                <div class="text-yellow-400 text-sm mb-4">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold">
+                        F</div>
+                    <div>
+                        <h4 class="font-bold text-sm">Felipe Paredes</h4>
+                        <p class="text-xs text-gray-500">FullStack Developer</p>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-600 leading-relaxed">
+                    "Me parece genial este Marketplace de productos para programadores, llevaba un tiempo buscando algo
+                    así..."
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

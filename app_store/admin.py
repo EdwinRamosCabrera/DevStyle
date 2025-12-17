@@ -5,6 +5,7 @@ from .models import Category, Product
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('code', 'name', 'description')
     prepopulated_fields = {'slug': ('name',)}   
+    ordering = ('code',)
     list_per_page = 20
 
 

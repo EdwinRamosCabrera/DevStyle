@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'app_store',
+    'app_home',
+    'app_account',
 ]
 
 # Tailwind
@@ -67,7 +69,7 @@ ROOT_URLCONF = 'devstyle.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,6 +83,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'devstyle.wsgi.application'
 
+# AUTH
+# https://docs.djangoproject.com/en/5.2/ref/settings/#auth
+
+AUTH_USER_MODEL = 'app_account.User'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
